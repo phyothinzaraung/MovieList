@@ -11,7 +11,17 @@ import com.kbz.phyothinzaraung.movielist.databinding.ItemMovieBinding
 import com.kbz.phyothinzaraung.movielist.ui.RecyclerViewItemClickListener
 import com.kbz.phyothinzaraung.movielist.util.Constant
 
-class MovieAdapter(private val listener: RecyclerViewItemClickListener): PagingDataAdapter<Movie, MovieAdapter.MovieViewHolder>(MovieComparator()) {
+class MovieAdapter(
+    private val listener: RecyclerViewItemClickListener
+): PagingDataAdapter<Movie, MovieAdapter.MovieViewHolder>(MovieComparator()) {
+
+//    private lateinit var movieList: PagingData<Movie>
+//    private lateinit var listdataSearch: PagingData<Movie>
+//
+//    fun setSearchData(movieList: PagingData<Movie>){
+//        this.movieList = movieList
+//        listdataSearch = movieList
+//    }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bind(getItem(position)!!, listener)
@@ -21,6 +31,42 @@ class MovieAdapter(private val listener: RecyclerViewItemClickListener): PagingD
         val binding = ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MovieViewHolder(binding)
     }
+
+//    override fun getFilter(): Filter {
+//        return object : Filter() {
+//            override fun performFiltering(query: CharSequence?): Filter.FilterResults {
+//
+//
+//                var listFilter: PagingData<Movie>
+//                if(query==null||query.isEmpty())
+//                {
+//                    listFilter =movieList
+//                }else
+//                {
+//
+//                    val filterPattern: String = query.toString().toLowerCase().trim()
+//                    for (item in movieList) {
+//                        if (item.title.toLowerCase().contains(filterPattern)) {
+//                            listFilter.add(item)
+//                        }
+//                    }
+//                }
+//                val results = Filter.FilterResults()
+//                results.values = listFilter
+//                return  results;
+//            }
+//
+//            override fun publishResults(p0: CharSequence?, p1: Filter.FilterResults?) {
+//
+//                listdataSearch.clear()
+//                listdataSearch.addAll(p1?.values as Collection<Movie>)
+//
+//                notifyDataSetChanged()
+//            }
+//        }
+//
+//
+//    }
 
     class MovieViewHolder(private val binding: ItemMovieBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(movie: Movie, listener: RecyclerViewItemClickListener){

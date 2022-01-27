@@ -1,7 +1,5 @@
 package com.kbz.phyothinzaraung.movielist.ui.movies
 
-import android.app.SearchManager
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -85,10 +83,23 @@ class MovieListFragment : Fragment(), RecyclerViewItemClickListener {
         inflater.inflate(R.menu.menu_search, menu)
 
         // Associate searchable configuration with the SearchView
-        val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        (menu.findItem(R.id.action_search).actionView as SearchView).apply {
-            setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
-        }
+//        val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+//        (menu.findItem(R.id.action_search).actionView as SearchView).apply {
+//            setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
+//        }
+
+        val searchView = menu.findItem(R.id.action_search).actionView as SearchView
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                //movieAdapter.filter.filter(newText)
+                return false
+            }
+
+        })
 
         super.onCreateOptionsMenu(menu, inflater)
     }
