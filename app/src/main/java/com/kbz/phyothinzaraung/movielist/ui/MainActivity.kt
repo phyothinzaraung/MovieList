@@ -2,7 +2,6 @@ package com.kbz.phyothinzaraung.movielist.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.kbz.phyothinzaraung.movielist.R
 import com.kbz.phyothinzaraung.movielist.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

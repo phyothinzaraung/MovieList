@@ -12,7 +12,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.paging.ExperimentalPagingApi
-import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kbz.phyothinzaraung.movielist.R
 import com.kbz.phyothinzaraung.movielist.data.model.Movie

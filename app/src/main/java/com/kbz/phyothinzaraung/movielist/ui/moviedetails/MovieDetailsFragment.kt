@@ -84,7 +84,7 @@ class MovieDetailsFragment : Fragment() {
         })
     }
 
-    fun navigateToMovieList(){
+    private fun navigateToMovieList(){
         Navigation.findNavController(binding.root).navigate(R.id.action_movieDetailsFragment_to_movieListFragment)
     }
 
