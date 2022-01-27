@@ -1,15 +1,18 @@
 package com.kbz.phyothinzaraung.movielist.ui.movies
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.paging.ExperimentalPagingApi
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kbz.phyothinzaraung.movielist.R
 import com.kbz.phyothinzaraung.movielist.data.model.Movie
@@ -30,8 +33,10 @@ class MovieListFragment : Fragment(), RecyclerViewItemClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMovieListBinding.inflate(inflater, container, false)
+
+        setupToolbar()
 
         binding.apply {
             recyclerviewMovies.apply {
@@ -48,6 +53,7 @@ class MovieListFragment : Fragment(), RecyclerViewItemClickListener {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.movie.collectLatest {
                 movieAdapter.submitData(it)
+                binding.progressBar.visibility = View.GONE
             }
         }
     }
@@ -62,4 +68,30 @@ class MovieListFragment : Fragment(), RecyclerViewItemClickListener {
         viewModel.onStart()
 
     }
+
+    private fun setupToolbar(){
+        val toolbar = binding.appbar.toolbar
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        if ((activity as AppCompatActivity).supportActionBar != null) {
+            (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_search, menu)
+
+        // Associate searchable configuration with the SearchView
+        val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        (menu.findItem(R.id.action_search).actionView as SearchView).apply {
+            setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
+        }
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
 }
+

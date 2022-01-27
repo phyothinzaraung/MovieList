@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.*
 import com.kbz.phyothinzaraung.movielist.data.repository.MoviesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -18,6 +19,7 @@ class MoviesViewModel @Inject constructor(
     private val loadMovieChannel = Channel<String>() {}
     private val loadMovieTrigger = loadMovieChannel.receiveAsFlow()
     var onprogress = false
+    @ExperimentalCoroutinesApi
     @ExperimentalPagingApi
     val movie = loadMovieTrigger.flatMapLatest {
         repository.getMovies().cachedIn(viewModelScope)

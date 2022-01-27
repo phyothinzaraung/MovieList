@@ -7,4 +7,5 @@
     <string name="language">Language</string>
     <string name="release_date">Release Date</string>
     <string name="label_overview">Overview</string>
+    <string name="search_hint">Search</string>
 </resources>

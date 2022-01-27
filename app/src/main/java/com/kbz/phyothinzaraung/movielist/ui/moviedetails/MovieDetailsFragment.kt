@@ -3,13 +3,10 @@ package com.kbz.phyothinzaraung.movielist.ui.moviedetails
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
@@ -26,14 +23,8 @@ class MovieDetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
-
-        //clear back stack
-        val fm = requireActivity().supportFragmentManager
-        for (i in 0 until fm.backStackEntryCount) {
-            fm.popBackStack()
-        }
 
         movie = arguments?.getSerializable(Constant.BundleKey) as Movie
         setupToolbar()
