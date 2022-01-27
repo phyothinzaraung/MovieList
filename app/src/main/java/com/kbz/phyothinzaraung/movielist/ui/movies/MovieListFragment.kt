@@ -43,8 +43,8 @@ class MovieListFragment : Fragment(), RecyclerViewItemClickListener {
                 adapter = movieAdapter
                 layoutManager = GridLayoutManager(context, 2)
             }
-            fetchMovies()
         }
+        fetchMovies()
         return binding.root
     }
 
