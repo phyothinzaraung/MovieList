@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.Navigation
@@ -45,6 +46,7 @@ class MovieDetailsFragment : Fragment() {
             movieDetailsInfo.textReleaseDate.text = movie.release_date
             movieDetailsInfo.textOverview.text = movie.overview
         }
+
         return binding.root
     }
 
@@ -57,7 +59,7 @@ class MovieDetailsFragment : Fragment() {
         }
 
         toolbar.setNavigationOnClickListener{
-            Navigation.findNavController(binding.root).navigate(R.id.action_movieDetailsFragment_to_movieListFragment)
+            navigateToMovieList()
         }
     }
 
@@ -80,5 +82,17 @@ class MovieDetailsFragment : Fragment() {
                 }
             }
         })
+    }
+
+    fun navigateToMovieList(){
+        Navigation.findNavController(binding.root).navigate(R.id.action_movieDetailsFragment_to_movieListFragment)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(this){
+            navigateToMovieList()
+        }
     }
 }
